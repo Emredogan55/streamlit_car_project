@@ -42,7 +42,11 @@ for url in urls:
     # CSV dosyasını indirin ve DataFrame'e dönüştürün
     df = pd.read_csv(url)
     # Birleştirilmiş DataFrame'e ekleyin
-    combined_df = combined_df.append(df, ignore_index=True)
+    if combined_df.empty:
+        combined_df = df
+    else:
+        combined_df = combined_df.append(df, ignore_index=True)
+df=combined_df        
 
 silinecek_sutunlar = ["Unnamed: 0", "ilan_no", "cekis", "boya_degisen", "arac_turu", "garanti", "plaka_uyruk", "renk",
                         "Yıllık mtv tutarı", "Takasa uygunmu", "sag_arka_camurluk", "arka_kaput", "sol_arka_camurluk",
