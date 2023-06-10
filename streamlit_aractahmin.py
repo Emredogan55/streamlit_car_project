@@ -34,18 +34,15 @@ urls = [
     "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_renault_otomobil.csv"
 ]
 
-# Tüm CSV dosyalarını birleştirerek bir DataFrame oluşturun
-combined_df = pd.DataFrame()
-
 # Tüm CSV dosyalarını indirin ve birleştirin
+dfs = []
 for url in urls:
     # CSV dosyasını indirin ve DataFrame'e dönüştürün
     df = pd.read_csv(url)
-    # Birleştirilmiş DataFrame'e ekleyin
-    if combined_df.empty:
-        combined_df = df
-    else:
-        combined_df = combined_df.append(df, ignore_index=True)
+    dfs.append(df)
+
+# Tüm DataFrame'leri birleştirin
+combined_df = pd.concat(dfs, ignore_index=True)
 df=combined_df        
 
 silinecek_sutunlar = ["Unnamed: 0", "ilan_no", "cekis", "boya_degisen", "arac_turu", "garanti", "plaka_uyruk", "renk",
