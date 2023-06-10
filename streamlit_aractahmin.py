@@ -17,21 +17,32 @@ from sklearn.impute import SimpleImputer
 import streamlit as st
 import pandas as pd
 
-df1 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_audi_otomobil.csv")
-df2 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_bmw_otomobil.csv")
-df3 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_mercedes_otomobil.csv")
-df4 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_citroen.csv")
-df5 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_fiat.csv")
-df6 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_ford.csv")
-df7 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_honda.csv")
-df8 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_hyundai.csv")
-df9 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_opel.csv")
-df10 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_toyota.csv")
-df11 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_otomobil_volswogen.csv")
-df12 = pd.read_csv(r"C:\Users\ireme\PycharmProjects\aractahmin\veriseti\data_renault_otomobil.csv")
 
-# Tüm veri çerçevelerini birleştir
-df = pd.concat([df1, df2, df3, df4, df5, df6, df7, df8, df9, df10, df11, df12], ignore_index=True)
+# GitHub'daki 12 CSV dosyasının URL'lerini belirtin
+urls = [
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_audi_otomobil.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_bmw_otomobil.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_mercedes_otomobil.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_citroen.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_fiat.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_ford.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_honda.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_hyundai.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_opel.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_toyota.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_otomobil_volswogen.csv",
+    "https://raw.githubusercontent.com/Emredogan55/streamlit_car_project/main/data_renault_otomobil.csv"
+]
+
+# Tüm CSV dosyalarını birleştirerek bir DataFrame oluşturun
+combined_df = pd.DataFrame()
+
+# Tüm CSV dosyalarını indirin ve birleştirin
+for url in urls:
+    # CSV dosyasını indirin ve DataFrame'e dönüştürün
+    df = pd.read_csv(url)
+    # Birleştirilmiş DataFrame'e ekleyin
+    combined_df = combined_df.append(df, ignore_index=True)
 
 silinecek_sutunlar = ["Unnamed: 0", "ilan_no", "cekis", "boya_degisen", "arac_turu", "garanti", "plaka_uyruk", "renk",
                         "Yıllık mtv tutarı", "Takasa uygunmu", "sag_arka_camurluk", "arka_kaput", "sol_arka_camurluk",
